@@ -33,7 +33,8 @@
 				'regexp/index.html',
 				'regexsafeprefixsuffix/index.js',
 				'types/test.js',
-				'copyFileToFile/index.production.html'
+				'copyFileToFile/index.production.html',
+				'mustache/mustache.html'
 			];
 
 			// Files not expected to exist after execution

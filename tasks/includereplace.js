@@ -22,7 +22,8 @@ module.exports = function(grunt) {
 			globals: {},
 			includesDir: '',
 			docroot: '.',
-			encoding: 'utf-8'
+			encoding: 'utf-8',
+			useMustache: true
 		});
 
 		grunt.log.debug('Options', options);
@@ -56,7 +57,9 @@ module.exports = function(grunt) {
 
 
 			// Mustache
-			contents = mustache.to_html(contents, localVars);
+			if(options.useMustache) {
+				contents = mustache.to_html(contents, localVars);
+			}
 
 			// Replace local vars
 			varNames.forEach(function(varName) {

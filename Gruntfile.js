@@ -105,6 +105,16 @@ module.exports = function(grunt) {
 					includesDir : 'test/global_includes/'
 				}
 			},
+			mustache: {
+				src: 'mustache.html',
+				dest: 'dist/mustache/',
+				expand: true,
+				cwd: 'test/files/mustache/',
+				options : {
+					//The base path where includes will be resolved
+					includesDir : 'test/global_includes/'
+				}
+			},
 			process: {
 				options: {
 					processIncludeContents: function(contents, localVars) {

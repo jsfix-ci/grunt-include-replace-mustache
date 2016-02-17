@@ -2,20 +2,23 @@
 
 > Grunt task to include files and replace variables.
 
-Allows for parameterised file includes:
+Allows for parameterised file includes and also mustache slang:
 
 hello.html
 
 ```html
 <!DOCTYPE html>
 <h1>Hello World!</h1>
-@@include('/path/to/include/message.html', {"name": "Joe Bloggs"})
+@@include('/path/to/include/message.html', {"name": "Joe Bloggs", "age" : 32, "showAge" : true})
 ```
 
 message.html
 
 ```html
 <p>Hello @@name!</p>
+{{#showAge}}
+<p>Age: {{age}}<p>
+{{/showAge}}
 ```
 
 Result:
@@ -24,6 +27,7 @@ Result:
 <!DOCTYPE html>
 <h1>Hello World!</h1>
 <p>Hello Joe Bloggs!</p>
+<p>32</p>
 ```
 
 ## Getting Started
@@ -33,13 +37,13 @@ This plugin requires Grunt `~0.4.4`
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-include-replace --save-dev
+npm install grunt-include-replace-mustache --save-dev
 ```
 
 One the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-include-replace');
+grunt.loadNpmTasks('grunt-include-replace-mustache');
 ```
 
 ## The "includereplace" task
@@ -111,7 +115,13 @@ Encoding files are using.
 Type: `Function`  
 Default value: undefined
 
-A function called for every included file prior to processing by `grunt-include-replace`. It is passed the include file contents, local variables and the file path as parameters and should return the (possibly altered) file contents.
+A function called for every included file prior to processing by `grunt-include-replace-mustache`. It is passed the include file contents, local variables and the file path as parameters and should return the (possibly altered) file contents.
+
+#### options.useMustache
+Type: `Boolean`  
+Default value: true
+
+Uses MustacheJS Template on every included File
 
 ### Usage Examples
 
@@ -197,6 +207,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+ * 2016-02-17   v3.3.1   Mustache Usage is now possible
  * 2015-08-28   v3.2.0   Pass file path to processIncludeContents
  * 2015-08-04   v3.1.0   Support for non-utf8 encoding
  * 2015-02-05   v3.0.0   Better logging for missing source files
