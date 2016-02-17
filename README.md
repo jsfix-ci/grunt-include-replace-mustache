@@ -123,6 +123,12 @@ Default value: true
 
 Uses MustacheJS Template on every included File
 
+#### options.alwaysUnescaped
+Type: `Boolean`  
+Default value: false
+
+Should all Mustache Values always be unescaped? (Same as {{{varname}}})
+
 ### Usage Examples
 
 #### Default Options
@@ -207,6 +213,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+ * 2016-02-17   v3.4.0   Option for Mustache: Always unescaped Values
  * 2016-02-17   v3.3.1   Mustache Usage is now possible
  * 2015-08-28   v3.2.0   Pass file path to processIncludeContents
  * 2015-08-04   v3.1.0   Support for non-utf8 encoding

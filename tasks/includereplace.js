@@ -23,8 +23,15 @@ module.exports = function(grunt) {
 			includesDir: '',
 			docroot: '.',
 			encoding: 'utf-8',
-			useMustache: true
+			useMustache: true,
+			alwaysUnescaped: false
 		});
+
+		if(options.alwaysUnescaped) {
+			mustache.escape = function(string) {
+				return string;
+			};
+		}
 
 		grunt.log.debug('Options', options);
 
