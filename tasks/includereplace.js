@@ -12,6 +12,7 @@ module.exports = function(grunt) {
 
 	var _ = grunt.util._;
 	var path = require('path');
+	var mustache = require('mustache');
 
 	grunt.registerMultiTask('includereplace', 'Include files and replace variables', function() {
 
@@ -52,6 +53,10 @@ module.exports = function(grunt) {
 
 			var varNames = Object.keys(localVars);
 			var varRegExps = {};
+
+
+			// Mustache
+			contents = mustache.to_html(contents, localVars);
 
 			// Replace local vars
 			varNames.forEach(function(varName) {

@@ -1,16 +1,16 @@
 {
-  "name": "grunt-include-replace",
-  "version": "3.2.0",
-  "description": "Grunt task to include files and replace variables. Allows for parameterised includes.",
-  "author": "Alan Shaw <alan138@gmail.com>",
+  "name": "grunt-include-replace-mustache",
+  "version": "1.0.0",
+  "description": "Grunt task to include files and replace variables. Allows for parameterised includes. And also mustache templates",
+  "author": "Alan Shaw <alan138@gmail.com>, Gilles Meyer",
   "license": "MIT",
-  "homepage": "https://github.com/alanshaw/grunt-include-replace",
+  "homepage": "https://github.com/babielgm/grunt-include-replace-mustache",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alanshaw/grunt-include-replace.git"
+    "url": "https://github.com/babielgm/grunt-include-replace-mustache.git"
   },
   "bugs": {
-    "url": "https://github.com/alanshaw/grunt-include-replace/issues"
+    "url": "https://github.com/babielgm/grunt-include-replace-mustache/issues"
   },
   "files": [
     "tasks",
@@ -27,13 +27,15 @@
     "variable",
     "parameter",
     "import",
-    "template"
+    "template",
+    "mustache"
   ],
   "devDependencies": {
     "grunt": "~0.4.4",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-jshint": "^0.11.0",
-    "grunt-contrib-nodeunit": "^0.4.1"
+    "grunt-contrib-nodeunit": "^0.4.1",
+    "mustache": "^2.2.1"
   },
   "peerDependencies": {
     "grunt": "~0.4.4"
