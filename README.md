@@ -1,4 +1,4 @@
-# grunt-include-replace-mustache [![Build Status](https://travis-ci.org/alanshaw/grunt-include-replace.svg)](https://travis-ci.org/alanshaw/grunt-include-replace) [![devDependency Status](https://david-dm.org/babielgm/grunt-include-replace-mustache/dev-status.svg)](https://david-dm.org/babielgm/grunt-include-replace-mustache#info=devDependencies)
+# grunt-include-replace-mustache [![Build Status](https://travis-ci.org/babielgm/grunt-include-replace-mustache.svg)](https://travis-ci.org/babielgm/grunt-include-replace-mustache) [![devDependency Status](https://david-dm.org/babielgm/grunt-include-replace-mustache/dev-status.svg)](https://david-dm.org/babielgm/grunt-include-replace-mustache#info=devDependencies)
 
 > Grunt task to include files and replace variables.
 
