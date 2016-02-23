@@ -38,7 +38,8 @@
     "mustache": "^2.2.1"
   },
   "peerDependencies": {
-    "grunt": "~0.4.4"
+    "grunt": "~0.4.4",
+    "mustache": "^2.2.1"
   },
   "engines": {
     "node": ">=0.8.0"
