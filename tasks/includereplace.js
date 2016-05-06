@@ -139,6 +139,7 @@ module.exports = function(grunt) {
 				var match = matches[0];
 				var includePath = matches[1];
 				var localVars = matches[3] ? JSON.parse(matches[3]) : {};
+				var paramIncludePath = includePath;
 
 				if (!grunt.file.isPathAbsolute(includePath)) {
 					includePath = path.resolve(path.join((options.includesDir ? options.includesDir : workingDir), includePath));
@@ -163,6 +164,9 @@ module.exports = function(grunt) {
 				grunt.log.debug('Locals', localVars);
 
 				var includeContents = getIncludeContents(includePath, localVars);
+				if(options.debug == true) {
+					includeContents = "<!-- start include: "+paramIncludePath+" -->"+includeContents+"<!-- end include: "+paramIncludePath+" -->";
+				}
 				contents = contents.replace(match, createReplaceFn(includeContents));
 
 				matches = includeRegExp.exec(contents);
