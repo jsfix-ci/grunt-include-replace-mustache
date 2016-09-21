@@ -65,7 +65,18 @@ module.exports = function(grunt) {
 
 			// Mustache
 			if(options.useMustache) {
-				contents = mustache.to_html(contents, localVars);
+
+				// mixedVars = localVars plus globalVars where localVars is not defined - TODO: deep merge
+				var mixedVars = {};
+				for(var key in localVars) {
+					mixedVars[key] = localVars[key];
+				}
+				for(var key in globalVars) {
+					if(localVars[key] === undefined) {
+						mixedVars[key] = globalVars[key];
+					}
+				}
+				contents = mustache.to_html(contents, mixedVars);
 			}
 
 			// Replace local vars

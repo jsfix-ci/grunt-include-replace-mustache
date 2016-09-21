@@ -115,6 +115,19 @@ module.exports = function(grunt) {
 					includesDir : 'test/global_includes/'
 				}
 			},
+			mustache_globals: {
+				src: 'mustache_globals.html',
+				dest: 'dist/mustache_globals/',
+				expand: true,
+				cwd: 'test/files/mustache_globals/',
+				options: {
+					globals: {
+						"age": "18", //not defined as localVar => does get set
+						"single": false //already defined as localVar => does not get set
+					},
+					includesDir : 'test/global_includes/'
+				}
+			},
 			process: {
 				options: {
 					processIncludeContents: function(contents, localVars) {

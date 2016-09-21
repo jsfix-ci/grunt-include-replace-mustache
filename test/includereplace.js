@@ -34,7 +34,8 @@
 				'regexsafeprefixsuffix/index.js',
 				'types/test.js',
 				'copyFileToFile/index.production.html',
-				'mustache/mustache.html'
+				'mustache/mustache.html',
+				'mustache_globals/mustache_globals.html'
 			];
 
 			// Files not expected to exist after execution
