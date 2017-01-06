@@ -13,6 +13,7 @@ module.exports = function(grunt) {
 	var _ = grunt.util._;
 	var path = require('path');
 	var mustache = require('mustache');
+	var handlebars = require('handlebars');
 
 	grunt.registerMultiTask('includereplace', 'Include files and replace variables', function() {
 
@@ -24,8 +25,29 @@ module.exports = function(grunt) {
 			docroot: '.',
 			encoding: 'utf-8',
 			useMustache: true,
+			templateLanguage: '',
 			alwaysUnescaped: false
 		});
+
+		var supportedTemplateLanguages = ['none', 'mustache', 'handlebars'];
+
+		if(options.templateLanguage === '') {
+      if(options.useMustache) {
+        // if mustache should be used, set templateLanguage to "mustache"
+        options.templateLanguage = 'mustache';
+      } else {
+      	// if mustache should not be used, set templateLanguage to default (="none")
+      	options.templateLanguage = 'none';
+      }
+		} else {
+      // if templateLanugage is specified, check if specified value for templateLanguage is supported.
+			// if not, set templateLanguage to default (="none");
+      if(supportedTemplateLanguages.indexOf(options.templateLanguage) === -1) {
+        options.templateLanguage = 'none';
+      }
+		}
+
+		grunt.log.writeln('Template-Language: ', options.templateLanguage);
 
 		if(options.alwaysUnescaped) {
 			mustache.escape = function(string) {
@@ -55,6 +77,23 @@ module.exports = function(grunt) {
 		// Cached variable regular expressions
 		var globalVarRegExps = {};
 
+    // mixedVars = localVars plus globalVars where localVars is not defined - TODO: deep merge
+		function extendVariablesWithGlobalVariables(localVars, globalVars) {
+      var mixedVars = {};
+
+      for(var key in localVars) {
+        mixedVars[key] = localVars[key];
+      }
+
+      for(var key in globalVars) {
+        if(localVars[key] === undefined) {
+          mixedVars[key] = globalVars[key];
+        }
+      }
+
+      return mixedVars;
+		}
+
 		function replace(contents, localVars) {
 
 			localVars = localVars || {};
@@ -62,21 +101,17 @@ module.exports = function(grunt) {
 			var varNames = Object.keys(localVars);
 			var varRegExps = {};
 
+			if(options.templateLanguage === 'mustache') {
+        // Use Mustache
+				var mixedVars = extendVariablesWithGlobalVariables(localVars, globalVars);
 
-			// Mustache
-			if(options.useMustache) {
-
-				// mixedVars = localVars plus globalVars where localVars is not defined - TODO: deep merge
-				var mixedVars = {};
-				for(var key in localVars) {
-					mixedVars[key] = localVars[key];
-				}
-				for(var key in globalVars) {
-					if(localVars[key] === undefined) {
-						mixedVars[key] = globalVars[key];
-					}
-				}
 				contents = mustache.to_html(contents, mixedVars);
+			} else if(options.templateLanguage === 'handlebars') {
+				// Use Handlebars
+        var mixedVars = extendVariablesWithGlobalVariables(localVars, globalVars);
+
+				var template = handlebars.compile(contents);
+				contents = template(mixedVars);
 			}
 
 			// Replace local vars

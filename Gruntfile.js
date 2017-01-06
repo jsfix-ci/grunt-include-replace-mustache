@@ -122,12 +122,36 @@ module.exports = function(grunt) {
 				cwd: 'test/files/mustache_globals/',
 				options: {
 					globals: {
-						"age": "18", //not defined as localVar => does get set
-						"single": false //already defined as localVar => does not get set
+						'age': '18', //not defined as localVar => does get set
+						'single': false //already defined as localVar => does not get set
 					},
 					includesDir : 'test/global_includes/'
 				}
 			},
+			handlebars: {
+				src: 'handlebars.html',
+				dest: 'dist/handlebars/',
+				expand: true,
+				cwd: 'test/files/handlebars/',
+				options: {
+					includesDir: 'test/global_includes/',
+					templateLanguage: 'handlebars'
+				}
+			},
+      handlebars_globals: {
+        src: 'handlebars_globals.html',
+        dest: 'dist/handlebars_globals/',
+        expand: true,
+        cwd: 'test/files/handlebars_globals/',
+        options: {
+          includesDir: 'test/global_includes/',
+          templateLanguage: 'handlebars',
+					globals: {
+          	'substantive': 'cat',
+						'addition': 'has curly hair'
+					}
+        }
+      },
 			process: {
 				options: {
 					processIncludeContents: function(contents, localVars) {
